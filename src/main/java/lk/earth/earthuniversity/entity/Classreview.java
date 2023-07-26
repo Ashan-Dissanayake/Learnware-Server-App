@@ -1,7 +1,5 @@
 package lk.earth.earthuniversity.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
 import java.sql.Date;
 import java.sql.Time;
@@ -22,20 +20,17 @@ public class Classreview {
     @Basic
     @Column(name = "remarks")
     private String remarks;
-    @Basic
-    @Column(name = "timelost")
-    private Integer timelost;
     @ManyToOne
     @JoinColumn(name = "class_id", referencedColumnName = "id", nullable = false)
     private Clazz clazz;
-
     @ManyToOne
     @JoinColumn(name = "reviewrate_id", referencedColumnName = "id", nullable = false)
     private Reviewrate reviewrate;
-
     @OneToMany(mappedBy = "classreview")
-    @JsonIgnore
     private Collection<Reviewtopic> reviewtopics;
+    @ManyToOne
+    @JoinColumn(name = "timelost_id", referencedColumnName = "id")
+    private Timelost timelost;
 
     public Integer getId() {
         return id;
@@ -69,14 +64,6 @@ public class Classreview {
         this.remarks = remarks;
     }
 
-    public Integer getTimelost() {
-        return timelost;
-    }
-
-    public void setTimelost(Integer timelost) {
-        this.timelost = timelost;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -88,7 +75,6 @@ public class Classreview {
         if (doreview != null ? !doreview.equals(that.doreview) : that.doreview != null) return false;
         if (toreview != null ? !toreview.equals(that.toreview) : that.toreview != null) return false;
         if (remarks != null ? !remarks.equals(that.remarks) : that.remarks != null) return false;
-        if (timelost != null ? !timelost.equals(that.timelost) : that.timelost != null) return false;
 
         return true;
     }
@@ -99,7 +85,6 @@ public class Classreview {
         result = 31 * result + (doreview != null ? doreview.hashCode() : 0);
         result = 31 * result + (toreview != null ? toreview.hashCode() : 0);
         result = 31 * result + (remarks != null ? remarks.hashCode() : 0);
-        result = 31 * result + (timelost != null ? timelost.hashCode() : 0);
         return result;
     }
 
@@ -125,5 +110,13 @@ public class Classreview {
 
     public void setReviewtopics(Collection<Reviewtopic> reviewtopics) {
         this.reviewtopics = reviewtopics;
+    }
+
+    public Timelost getTimelost() {
+        return timelost;
+    }
+
+    public void setTimelostB(Timelost timelost) {
+        this.timelost = timelost;
     }
 }

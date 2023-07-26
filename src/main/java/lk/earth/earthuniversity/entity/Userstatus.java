@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.Collection;
-import java.util.Objects;
 
 @Entity
 public class Userstatus {
@@ -15,8 +14,9 @@ public class Userstatus {
     @Basic
     @Column(name = "name")
     private String name;
-    @OneToMany(mappedBy = "userstatus")
+
     @JsonIgnore
+    @OneToMany(mappedBy = "userstatus")
     private Collection<User> users;
 
     public Integer getId() {
@@ -39,13 +39,20 @@ public class Userstatus {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+
         Userstatus that = (Userstatus) o;
-        return Objects.equals(id, that.id) && Objects.equals(name, that.name);
+
+        if (id != null ? !id.equals(that.id) : that.id != null) return false;
+        if (name != null ? !name.equals(that.name) : that.name != null) return false;
+
+        return true;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name);
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        return result;
     }
 
     public Collection<User> getUsers() {

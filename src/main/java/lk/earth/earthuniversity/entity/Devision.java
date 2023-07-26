@@ -14,8 +14,8 @@ public class Devision {
     @Basic
     @Column(name = "name")
     private String name;
-    @OneToMany(mappedBy = "devisions")
     @JsonIgnore
+    @OneToMany(mappedBy = "devision")
     private Collection<Coursecategory> coursecategories;
 
     public Integer getId() {

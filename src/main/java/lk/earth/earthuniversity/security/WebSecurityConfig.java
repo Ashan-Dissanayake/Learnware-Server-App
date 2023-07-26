@@ -39,7 +39,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.cors();
         http.csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/banu").hasRole("ADMIN")
+                .antMatchers("/dilee").hasRole("ADMIN")
                 .antMatchers("/user").hasAnyRole("USER", "ADMIN")
                 .antMatchers("/", "/").permitAll()
                 .and()
@@ -56,7 +56,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         auth.userDetailsService(userService).passwordEncoder(passwordEncoder())
         .and()
                 .inMemoryAuthentication()
-                .withUser("banu")
+                .withUser("dilee")
                 .password(passwordEncoder().encode("Admin321"))
                 .roles("ACC");
 

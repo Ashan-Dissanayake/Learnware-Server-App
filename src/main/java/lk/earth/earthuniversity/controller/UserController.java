@@ -2,18 +2,14 @@ package lk.earth.earthuniversity.controller;
 
 
 import lk.earth.earthuniversity.dao.UserDao;
-import lk.earth.earthuniversity.entity.Privilage;
 import lk.earth.earthuniversity.entity.User;
 import lk.earth.earthuniversity.entity.Userrole;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;

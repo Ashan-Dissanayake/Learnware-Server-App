@@ -3,6 +3,7 @@ package lk.earth.earthuniversity.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import javax.validation.constraints.Pattern;
 import java.util.Collection;
 
 @Entity
@@ -13,9 +14,10 @@ public class Topic {
     private Integer id;
     @Basic
     @Column(name = "name")
+    @Pattern(regexp = "^([A-Z][a-z]*[.]?[\\s]?)*([A-Z][a-z]*)$", message = "Invalid Topic Name")
     private String name;
-    @OneToMany(mappedBy = "topic")
     @JsonIgnore
+    @OneToMany(mappedBy = "topic")
     private Collection<Reviewtopic> reviewtopics;
     @ManyToOne
     @JoinColumn(name = "lesson_id", referencedColumnName = "id", nullable = false)

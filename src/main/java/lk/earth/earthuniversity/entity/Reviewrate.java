@@ -14,8 +14,8 @@ public class Reviewrate {
     @Basic
     @Column(name = "rate")
     private Integer rate;
-    @OneToMany(mappedBy = "reviewrate")
     @JsonIgnore
+    @OneToMany(mappedBy = "reviewrate")
     private Collection<Classreview> classreviews;
 
     public Integer getId() {

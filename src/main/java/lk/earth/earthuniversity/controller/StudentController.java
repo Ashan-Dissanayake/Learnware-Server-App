@@ -2,8 +2,8 @@ package lk.earth.earthuniversity.controller;
 
 
 import lk.earth.earthuniversity.dao.StudentDao;
-import org.springframework.http.HttpStatus;
 import lk.earth.earthuniversity.entity.Student;
+import org.springframework.http.HttpStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

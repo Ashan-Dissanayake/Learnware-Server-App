@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.Collection;
-import java.util.Objects;
 
 @Entity
 public class Gender {
@@ -39,13 +38,20 @@ public class Gender {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+
         Gender gender = (Gender) o;
-        return Objects.equals(id, gender.id) && Objects.equals(name, gender.name);
+
+        if (id != null ? !id.equals(gender.id) : gender.id != null) return false;
+        if (name != null ? !name.equals(gender.name) : gender.name != null) return false;
+
+        return true;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name);
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        return result;
     }
 
     public Collection<Employee> getEmployees() {

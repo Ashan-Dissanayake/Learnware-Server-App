@@ -1,8 +1,6 @@
 package lk.earth.earthuniversity.controller;
 
-import lk.earth.earthuniversity.dao.EmployeestatusDao;
 import lk.earth.earthuniversity.dao.StudentstatusDao;
-import lk.earth.earthuniversity.entity.Employeestatus;
 import lk.earth.earthuniversity.entity.Studentstatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;

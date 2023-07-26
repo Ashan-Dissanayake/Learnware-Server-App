@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.Collection;
-import java.util.Objects;
 
 @Entity
 public class Operation {
@@ -15,11 +14,11 @@ public class Operation {
     @Basic
     @Column(name = "name")
     private String name;
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name = "module_id", referencedColumnName = "id")
     private Module module;
-    @OneToMany(mappedBy = "operation")
     @JsonIgnore
+    @OneToMany(mappedBy = "operation")
     private Collection<Privilage> privilages;
 
     public Integer getId() {
@@ -42,13 +41,20 @@ public class Operation {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+
         Operation operation = (Operation) o;
-        return Objects.equals(id, operation.id) && Objects.equals(name, operation.name);
+
+        if (id != null ? !id.equals(operation.id) : operation.id != null) return false;
+        if (name != null ? !name.equals(operation.name) : operation.name != null) return false;
+
+        return true;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name);
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        return result;
     }
 
     public Module getModule() {

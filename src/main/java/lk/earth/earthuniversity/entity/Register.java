@@ -1,8 +1,8 @@
 package lk.earth.earthuniversity.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.Pattern;
 import java.sql.Date;
-import java.util.Objects;
 
 @Entity
 public class Register {
@@ -12,6 +12,7 @@ public class Register {
     private Integer id;
     @Basic
     @Column(name = "no")
+    @Pattern(regexp = "^R\\d{7}$", message = "Invalid Number")
     private Integer no;
     @Basic
     @Column(name = "date")
@@ -57,13 +58,22 @@ public class Register {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+
         Register register = (Register) o;
-        return Objects.equals(id, register.id) && Objects.equals(no, register.no) && Objects.equals(date, register.date);
+
+        if (id != null ? !id.equals(register.id) : register.id != null) return false;
+        if (no != null ? !no.equals(register.no) : register.no != null) return false;
+        if (date != null ? !date.equals(register.date) : register.date != null) return false;
+
+        return true;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, no, date);
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (no != null ? no.hashCode() : 0);
+        result = 31 * result + (date != null ? date.hashCode() : 0);
+        return result;
     }
 
     public Student getStudent() {

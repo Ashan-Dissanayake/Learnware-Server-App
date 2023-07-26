@@ -2,6 +2,7 @@ package lk.earth.earthuniversity.security;
 
 import lk.earth.earthuniversity.dao.UserDao;
 import lk.earth.earthuniversity.entity.Privilage;
+import lk.earth.earthuniversity.entity.User;
 import lk.earth.earthuniversity.entity.Userrole;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -10,7 +11,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import  lk.earth.earthuniversity.entity.User;
 
 import java.util.HashSet;
 import java.util.List;
@@ -30,7 +30,7 @@ public class UserService implements UserDetailsService {
 
         User user = new User();
 
-        if ("banu".equals(username)){
+        if ("dilee".equals(username)){
 
             user.setUsername(username);
 
@@ -48,7 +48,7 @@ public class UserService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        if (username.equals("banu")) {
+        if (username.equals("dilee")) {
             Set<SimpleGrantedAuthority> authorities = new HashSet<>();
             authorities.add(new SimpleGrantedAuthority("gender-list-get"));
             authorities.add(new SimpleGrantedAuthority("designation-list-get"));
@@ -56,7 +56,7 @@ public class UserService implements UserDetailsService {
             authorities.add(new SimpleGrantedAuthority("employee-select"));
 
             return org.springframework.security.core.userdetails.User
-                    .withUsername("banu")
+                    .withUsername("dilee")
                     .password(new BCryptPasswordEncoder().encode("Admin321"))
                     .authorities(authorities)
                     .accountExpired(false)

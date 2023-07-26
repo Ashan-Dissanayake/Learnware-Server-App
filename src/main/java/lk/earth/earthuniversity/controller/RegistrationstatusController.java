@@ -1,11 +1,8 @@
 package lk.earth.earthuniversity.controller;
 
-import lk.earth.earthuniversity.dao.EmployeestatusDao;
 import lk.earth.earthuniversity.dao.RegistrationstatusDao;
-import lk.earth.earthuniversity.entity.Employeestatus;
 import lk.earth.earthuniversity.entity.Registrationstatus;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.security.saml2.Saml2RelyingPartyProperties;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

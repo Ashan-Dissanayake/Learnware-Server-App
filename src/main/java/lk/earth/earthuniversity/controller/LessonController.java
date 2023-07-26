@@ -1,8 +1,6 @@
 package lk.earth.earthuniversity.controller;
 
 import lk.earth.earthuniversity.dao.LessonDao;
-import lk.earth.earthuniversity.dao.LessonDao;
-import lk.earth.earthuniversity.entity.Employee;
 import lk.earth.earthuniversity.entity.Lesson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

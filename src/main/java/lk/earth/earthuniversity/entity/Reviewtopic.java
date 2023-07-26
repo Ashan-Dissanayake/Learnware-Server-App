@@ -1,5 +1,7 @@
 package lk.earth.earthuniversity.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity
@@ -8,6 +10,7 @@ public class Reviewtopic {
     @Id
     @Column(name = "id")
     private Integer id;
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "classreview_id", referencedColumnName = "id", nullable = false)
     private Classreview classreview;

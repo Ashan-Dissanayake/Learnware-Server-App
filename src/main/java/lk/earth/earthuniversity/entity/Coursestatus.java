@@ -14,8 +14,9 @@ public class Coursestatus {
     @Basic
     @Column(name = "name")
     private String name;
-    @OneToMany(mappedBy = "coursestatusByCoursestatusId")
+
     @JsonIgnore
+    @OneToMany(mappedBy = "coursestatus")
     private Collection<Course> courses;
 
     public Integer getId() {

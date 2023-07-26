@@ -2,7 +2,6 @@ package lk.earth.earthuniversity.controller;
 
 import lk.earth.earthuniversity.dao.DesignationDao;
 import lk.earth.earthuniversity.entity.Designation;
-import lk.earth.earthuniversity.entity.Gender;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;

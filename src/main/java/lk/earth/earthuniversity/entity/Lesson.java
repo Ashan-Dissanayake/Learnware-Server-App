@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.Collection;
-import java.util.Objects;
 
 @Entity
 public class Lesson {
@@ -15,22 +14,22 @@ public class Lesson {
     @Basic
     @Column(name = "name")
     private String name;
-
+    @OneToMany(mappedBy = "lesson")
     @JsonIgnore
-    @OneToMany(mappedBy = "lessonByLessonId")
     private Collection<Clazz> clazzes;
     @ManyToOne
     @JoinColumn(name = "course_id", referencedColumnName = "id", nullable = false)
     private Course course;
-    @OneToMany(mappedBy = "lesson")
     @JsonIgnore
+    @OneToMany(mappedBy = "lesson")
     private Collection<Topic> topics;
 
-    public Lesson(){}
+    public Lesson(){};
     public Lesson(int id,String name){
         this.id = id;
         this.name = name;
     }
+
 
     public Integer getId() {
         return id;
@@ -52,13 +51,20 @@ public class Lesson {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+
         Lesson lesson = (Lesson) o;
-        return Objects.equals(id, lesson.id) && Objects.equals(name, lesson.name);
+
+        if (id != null ? !id.equals(lesson.id) : lesson.id != null) return false;
+        if (name != null ? !name.equals(lesson.name) : lesson.name != null) return false;
+
+        return true;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name);
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        return result;
     }
 
     public Collection<Clazz> getClazzes() {

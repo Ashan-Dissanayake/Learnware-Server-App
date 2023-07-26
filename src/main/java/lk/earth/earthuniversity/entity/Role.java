@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.Collection;
-import java.util.Objects;
 
 @Entity
 public class Role {
@@ -15,11 +14,11 @@ public class Role {
     @Basic
     @Column(name = "name")
     private String name;
-    @OneToMany(mappedBy = "role", fetch = FetchType.EAGER)
     @JsonIgnore
+    @OneToMany(mappedBy = "role",fetch = FetchType.EAGER)
     private Collection<Privilage> privilages;
-    @OneToMany(mappedBy = "role")
     @JsonIgnore
+    @OneToMany(mappedBy = "role")
     private Collection<Userrole> userroles;
 
     public Integer getId() {
@@ -42,13 +41,20 @@ public class Role {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+
         Role role = (Role) o;
-        return Objects.equals(id, role.id) && Objects.equals(name, role.name);
+
+        if (id != null ? !id.equals(role.id) : role.id != null) return false;
+        if (name != null ? !name.equals(role.name) : role.name != null) return false;
+
+        return true;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name);
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        return result;
     }
 
     public Collection<Privilage> getPrivilages() {

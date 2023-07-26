@@ -2,7 +2,6 @@ package lk.earth.earthuniversity.controller;
 
 import lk.earth.earthuniversity.dao.OperationDao;
 import lk.earth.earthuniversity.entity.Operation;
-import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;

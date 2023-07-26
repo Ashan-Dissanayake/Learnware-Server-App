@@ -3,6 +3,7 @@ package lk.earth.earthuniversity.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import javax.validation.constraints.Pattern;
 import java.math.BigDecimal;
 import java.sql.Date;
 import java.util.Collection;
@@ -15,12 +16,15 @@ public class Course {
     private Integer id;
     @Basic
     @Column(name = "code")
+    @Pattern(regexp = "^C\\d{3}$", message = "Invalid Course Number")
     private String code;
     @Basic
     @Column(name = "name")
+    @Pattern(regexp = "^([A-Z][a-z]+)$", message = "Invalid name")
     private String name;
     @Basic
     @Column(name = "description")
+    @Pattern(regexp = "^.*$", message = "Invalid Description")
     private String description;
     @Basic
     @Column(name = "dointroduced")
@@ -37,28 +41,26 @@ public class Course {
     @Basic
     @Column(name = "durationpractical")
     private Integer durationpractical;
-    @ManyToOne
-    @JoinColumn(name = "coursecategory_id", referencedColumnName = "id", nullable = false)
-    private Coursecategory coursecategoryByCoursecategoryId;
-    @ManyToOne
-    @JoinColumn(name = "cordinator_id", referencedColumnName = "id", nullable = false)
-    private Employee employeeByCordinatorId;
-    @ManyToOne
-    @JoinColumn(name = "deputycordinator_id", referencedColumnName = "id", nullable = false)
-    private Employee employeeByDeputycordinatorId;
-    @ManyToOne
-    @JoinColumn(name = "coursestatus_id", referencedColumnName = "id", nullable = false)
-    private Coursestatus coursestatusByCoursestatusId;
-
     @JsonIgnore
     @OneToMany(mappedBy = "course")
     private Collection<Batch> batches;
-
+    @ManyToOne
+    @JoinColumn(name = "coursecategory_id", referencedColumnName = "id", nullable = false)
+    private Coursecategory coursecategory;
+    @ManyToOne
+    @JoinColumn(name = "cordinator_id", referencedColumnName = "id", nullable = false)
+    private Employee cordinator;
+    @ManyToOne
+    @JoinColumn(name = "deputycordinator_id", referencedColumnName = "id", nullable = false)
+    private Employee deputycordinator;
+    @ManyToOne
+    @JoinColumn(name = "coursestatus_id", referencedColumnName = "id", nullable = false)
+    private Coursestatus coursestatus;
     @JsonIgnore
     @OneToMany(mappedBy = "course")
     private Collection<Lesson> lessons;
 
-    public Course(){ }
+    public Course(){ };
 
     public Course(int id,String name){
         this.id = id;
@@ -174,44 +176,44 @@ public class Course {
         return result;
     }
 
-    public Coursecategory getCoursecategoryByCoursecategoryId() {
-        return coursecategoryByCoursecategoryId;
-    }
-
-    public void setCoursecategoryByCoursecategoryId(Coursecategory coursecategoryByCoursecategoryId) {
-        this.coursecategoryByCoursecategoryId = coursecategoryByCoursecategoryId;
-    }
-
-    public Employee getEmployeeByCordinatorId() {
-        return employeeByCordinatorId;
-    }
-
-    public void setEmployeeByCordinatorId(Employee employeeByCordinatorId) {
-        this.employeeByCordinatorId = employeeByCordinatorId;
-    }
-
-    public Employee getEmployeeByDeputycordinatorId() {
-        return employeeByDeputycordinatorId;
-    }
-
-    public void setEmployeeByDeputycordinatorId(Employee employeeByDeputycordinatorId) {
-        this.employeeByDeputycordinatorId = employeeByDeputycordinatorId;
-    }
-
-    public Coursestatus getCoursestatusByCoursestatusId() {
-        return coursestatusByCoursestatusId;
-    }
-
-    public void setCoursestatusByCoursestatusId(Coursestatus coursestatusByCoursestatusId) {
-        this.coursestatusByCoursestatusId = coursestatusByCoursestatusId;
-    }
-
     public Collection<Batch> getBatches() {
         return batches;
     }
 
     public void setBatches(Collection<Batch> batches) {
         this.batches = batches;
+    }
+
+    public Coursecategory getCoursecategory() {
+        return coursecategory;
+    }
+
+    public void setCoursecategory(Coursecategory coursecategory) {
+        this.coursecategory = coursecategory;
+    }
+
+    public Employee getCordinator() {
+        return cordinator;
+    }
+
+    public void setCordinator(Employee cordinator) {
+        this.cordinator = cordinator;
+    }
+
+    public Employee getDeputycordinator() {
+        return deputycordinator;
+    }
+
+    public void setDeputycordinator(Employee deputycordinator) {
+        this.deputycordinator = deputycordinator;
+    }
+
+    public Coursestatus getCoursestatus() {
+        return coursestatus;
+    }
+
+    public void setCoursestatus(Coursestatus coursestatus) {
+        this.coursestatus = coursestatus;
     }
 
     public Collection<Lesson> getLessons() {

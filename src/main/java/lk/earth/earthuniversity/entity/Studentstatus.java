@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.Collection;
-import java.util.Objects;
 
 @Entity
 public class Studentstatus {
@@ -15,7 +14,6 @@ public class Studentstatus {
     @Basic
     @Column(name = "name")
     private String name;
-
     @JsonIgnore
     @OneToMany(mappedBy = "studentstatus")
     private Collection<Student> students;
@@ -40,13 +38,20 @@ public class Studentstatus {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+
         Studentstatus that = (Studentstatus) o;
-        return Objects.equals(id, that.id) && Objects.equals(name, that.name);
+
+        if (id != null ? !id.equals(that.id) : that.id != null) return false;
+        if (name != null ? !name.equals(that.name) : that.name != null) return false;
+
+        return true;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name);
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        return result;
     }
 
     public Collection<Student> getStudents() {

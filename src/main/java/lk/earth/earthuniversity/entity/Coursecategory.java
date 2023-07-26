@@ -14,12 +14,12 @@ public class Coursecategory {
     @Basic
     @Column(name = "name")
     private String name;
-    @OneToMany(mappedBy = "coursecategoryByCoursecategoryId")
     @JsonIgnore
+    @OneToMany(mappedBy = "coursecategory")
     private Collection<Course> courses;
     @ManyToOne
     @JoinColumn(name = "devision_id", referencedColumnName = "id", nullable = false)
-    private Devision devisions;
+    private Devision devision;
 
     public Integer getId() {
         return id;
@@ -65,11 +65,11 @@ public class Coursecategory {
         this.courses = courses;
     }
 
-    public Devision getDevisions() {
-        return devisions;
+    public Devision getDevision() {
+        return devision;
     }
 
-    public void setDevisions(Devision devisions) {
-        this.devisions = devisions;
+    public void setDevision(Devision devision) {
+        this.devision = devision;
     }
 }

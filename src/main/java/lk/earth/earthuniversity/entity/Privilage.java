@@ -1,7 +1,6 @@
 package lk.earth.earthuniversity.entity;
 
 import javax.persistence.*;
-import java.util.Objects;
 
 @Entity
 public class Privilage {
@@ -42,13 +41,20 @@ public class Privilage {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+
         Privilage privilage = (Privilage) o;
-        return Objects.equals(id, privilage.id) && Objects.equals(authority, privilage.authority);
+
+        if (id != null ? !id.equals(privilage.id) : privilage.id != null) return false;
+        if (authority != null ? !authority.equals(privilage.authority) : privilage.authority != null) return false;
+
+        return true;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, authority);
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (authority != null ? authority.hashCode() : 0);
+        return result;
     }
 
     public Role getRole() {

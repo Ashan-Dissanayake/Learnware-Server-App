@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.Collection;
-import java.util.Objects;
 
 @Entity
 public class Classstatus {
@@ -15,10 +14,9 @@ public class Classstatus {
     @Basic
     @Column(name = "name")
     private String name;
-
     @JsonIgnore
     @OneToMany(mappedBy = "classstatus")
-    private Collection<Clazz> clazzestatuses;
+    private Collection<Clazz> clazzes;
 
     public Integer getId() {
         return id;
@@ -40,20 +38,27 @@ public class Classstatus {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+
         Classstatus that = (Classstatus) o;
-        return Objects.equals(id, that.id) && Objects.equals(name, that.name);
+
+        if (id != null ? !id.equals(that.id) : that.id != null) return false;
+        if (name != null ? !name.equals(that.name) : that.name != null) return false;
+
+        return true;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name);
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        return result;
     }
 
-    public Collection<Clazz> getClazzestatuses() {
-        return clazzestatuses;
+    public Collection<Clazz> getClazzes() {
+        return clazzes;
     }
 
-    public void setClazzestatuses(Collection<Clazz> clazzestatuses) {
-        this.clazzestatuses = clazzestatuses;
+    public void setClazzes(Collection<Clazz> clazzes) {
+        this.clazzes = clazzes;
     }
 }

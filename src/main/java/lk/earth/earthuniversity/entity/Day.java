@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.Collection;
-import java.util.Objects;
 
 @Entity
 public class Day {
@@ -15,7 +14,6 @@ public class Day {
     @Basic
     @Column(name = "name")
     private String name;
-
     @JsonIgnore
     @OneToMany(mappedBy = "day")
     private Collection<Batch> batches;
@@ -40,13 +38,20 @@ public class Day {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+
         Day day = (Day) o;
-        return Objects.equals(id, day.id) && Objects.equals(name, day.name);
+
+        if (id != null ? !id.equals(day.id) : day.id != null) return false;
+        if (name != null ? !name.equals(day.name) : day.name != null) return false;
+
+        return true;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name);
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        return result;
     }
 
     public Collection<Batch> getBatches() {

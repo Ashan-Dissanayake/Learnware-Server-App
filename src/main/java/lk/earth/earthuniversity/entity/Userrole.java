@@ -3,7 +3,6 @@ package lk.earth.earthuniversity.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
-import java.util.Objects;
 
 @Entity
 public class Userrole {
@@ -11,11 +10,12 @@ public class Userrole {
     @Id
     @Column(name = "id")
     private Integer id;
-    @ManyToOne(fetch = FetchType.EAGER)
+
     @JsonIgnore
+    @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
     private User user;
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name = "role_id", referencedColumnName = "id", nullable = false)
     private Role role;
 
@@ -31,13 +31,17 @@ public class Userrole {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+
         Userrole userrole = (Userrole) o;
-        return Objects.equals(id, userrole.id);
+
+        if (id != null ? !id.equals(userrole.id) : userrole.id != null) return false;
+
+        return true;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return id != null ? id.hashCode() : 0;
     }
 
     public User getUser() {

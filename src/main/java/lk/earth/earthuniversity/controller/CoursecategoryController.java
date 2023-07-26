@@ -29,7 +29,7 @@ public class CoursecategoryController {
                     Coursecategory c = new Coursecategory();
                            c.setId(coursecategory.getId());
                            c.setName(coursecategory.getName());
-                           c.setDevisions(coursecategory.getDevisions());return c;}
+                           c.setDevision(coursecategory.getDevision());return c;}
         ).collect(Collectors.toList());
 
         return coursecategories;
